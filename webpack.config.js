@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  mode: "production", // development | production
+  mode: "development", // development | production
   devtool: false,  // false | "eval" | etc...
 
   // // デフォルトは src/index.js
@@ -22,5 +22,20 @@ module.exports = {
     // 以下の[name]は entryをオブジェクトで書いた際の、keyの値がnameに入る
     // name | id | fullhash などがある。
     filename: 'application.[name].js'
+  },
+
+  module :{
+    rules:  [
+      {
+        test: /\.scss$/,
+        // 後ろから実行される
+        use: [
+          'style-loader',
+          'css-loader',
+          'postcss-loader',
+          'sass-loader'
+        ]
+      }
+    ]
   }
 };

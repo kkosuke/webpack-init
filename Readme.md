@@ -10,3 +10,7 @@ $ yarn run webpack --mode development --devtool false
 $ yarn run webpack --config webpack.config.js
 $ yarn run webpack --config webpack.dev.js
 ```
+
+```
+$ yarn  add --dev sass  sass-loader css-loader style-loader
+```
