@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  mode: "development", // development | production
+  mode: "production", // development | production
   devtool: false,  // false | "eval" | etc...
 
   // // デフォルトは src/index.js
@@ -18,7 +18,7 @@ module.exports = {
   },
 
   output: {
-    path: path.resolve(__dirname, 'public'),
+    path: path.resolve(__dirname, './public'),
     // 以下の[name]は entryをオブジェクトで書いた際の、keyの値がnameに入る
     // name | id | fullhash などがある。
     filename: 'application.[name].js'
@@ -35,7 +35,27 @@ module.exports = {
           'postcss-loader',
           'sass-loader'
         ]
+      },
+      {
+        test: /\.(jpe?g|gif|png|svg|woff2?|ttf|eot)$/,
+        type: 'javascript/auto',
+        dependency: { not: ['url'] },
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'images',
+              publicPath: 'images'
+            }
+          }
+        ]
       }
     ]
-  }
+  },
+  resolve: {
+		alias: {
+			'@images': path.resolve(__dirname, './src/images/'),
+		},
+	},
 };
